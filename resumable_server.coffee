@@ -170,13 +170,13 @@ if Meteor.isServer
 
             # File must exist to write to it
             unless file
-               res.writeHead(404)
+               res.writeHead(204)
                res.end()
                return
 
             # Make sure we have permission
             unless share.check_allow_deny.bind(@) 'write', req.meteorUserId, file, ['length', 'md5']
-               res.writeHead(404)
+               res.writeHead(204)
                res.end()
                return
 
@@ -197,7 +197,7 @@ if Meteor.isServer
                metadata: file.metadata
 
             unless writeStream
-               res.writeHead(404)
+               res.writeHead(204)
                res.end()
                return
 
@@ -235,13 +235,13 @@ if Meteor.isServer
 
       # If not, tell Resumable.js we don't have it yet
       unless file
-         res.writeHead(404)
+         res.writeHead(204)
          res.end()
          return
 
       # Make sure we'll allow the POST that will come subsequently come from this...
       unless share.check_allow_deny.bind(@) 'write', req.meteorUserId, file, ['length', 'md5']
-         res.writeHead(404)
+         res.writeHead(204)
          res.end()
          return
 
